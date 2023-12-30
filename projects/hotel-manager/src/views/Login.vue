@@ -36,6 +36,8 @@
 import { reactive, ref } from 'vue'
 // 导入element-plus类型
 import type { FormInstance, FormRules } from 'element-plus'
+// 导入请求api
+import { $login } from '../api/admin'
 
 // 定义一个ref对象绑定表单
 const formRef = ref<FormInstance>()
@@ -75,7 +77,12 @@ const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
   formEl.validate(valid => {
     if (valid) {
-      console.log('submit!')
+      // console.log('submit!')
+      let params = {
+        username: loginForm.loginId,
+        password: loginForm.loginPwd
+      }
+      $login(params)
     } else {
       console.log('error submit!')
       return false

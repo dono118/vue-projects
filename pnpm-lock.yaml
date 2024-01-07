@@ -16,6 +16,9 @@ importers:
       element-plus:
         specifier: ^2.4.4
         version: 2.4.4(vue@3.3.11)
+      md5js:
+        specifier: ^1.0.7
+        version: 1.0.7
       pinia:
         specifier: ^2.1.7
         version: 2.1.7(typescript@5.3.3)(vue@3.3.11)
@@ -948,6 +951,10 @@ packages:
 
   /lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==, tarball: https://registry.npmmirror.com/lodash/-/lodash-4.17.21.tgz}
+    dev: false
+
+  /md5js@1.0.7:
+    resolution: {integrity: sha512-97fZ6+8JijezAk/n37Lnswo4aJ67utCeCXlIsDid3uZ/khIeof0hWpIYeSvf0kiyqB0i9XfQvOyZPuBSR7g2Ng==, tarball: https://registry.npmmirror.com/md5js/-/md5js-1.0.7.tgz}
     dev: false
 
   /memoize-one@6.0.0:

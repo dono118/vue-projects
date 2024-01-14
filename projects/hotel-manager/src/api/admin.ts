@@ -20,7 +20,9 @@ export const $login = async (params: loginParam) => {
     // 登录成功后，将 token 保存到 sessionStorage 中
     sessionStorage.setItem('token', token)
     ElMessage.success(msg)
+    return true
   } else {
     ElMessage.error(msg)
+    return false
   }
 }

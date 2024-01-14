@@ -34,10 +34,15 @@
 <script setup lang="ts">
 // 导入组合式api
 import { reactive, ref } from 'vue'
+// 导入路由器
+import { useRouter } from 'vue-router'
 // 导入element-plus类型
 import type { FormInstance, FormRules } from 'element-plus'
 // 导入请求api
 import { $login } from '../api/admin'
+
+// 创建路由器对象
+const router = useRouter()
 
 // 定义一个ref对象绑定表单
 const formRef = ref<FormInstance>()
@@ -75,14 +80,17 @@ const rules = reactive<FormRules<typeof loginForm>>({
 // 提交表单
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
-  formEl.validate(valid => {
+  formEl.validate(async valid => {
     if (valid) {
       // console.log('submit!')
       let params = {
         username: loginForm.loginId,
         password: loginForm.loginPwd
       }
-      $login(params)
+      let res = await $login(params)
+      if (res) {
+        router.push('/index')
+      }
     } else {
       console.log('error submit!')
       return false

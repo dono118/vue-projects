@@ -44,7 +44,25 @@
       </el-menu>
     </div>
     <div class="right">
-      <div class="top">2</div>
+      <div class="top">
+        <el-menu
+          :ellipsis="false"
+          mode="horizontal"
+          active-text-color="#ffd04b"
+          background-color="#142334"
+          text-color="#fff"
+        >
+          <el-menu-item index="1">首页</el-menu-item>
+          <el-menu-item index="3">消息</el-menu-item>
+          <el-menu-item index="4">订单</el-menu-item>
+          <el-sub-menu index="2">
+            <template #title>管理员</template>
+            <el-menu-item index="2-1">个人中心</el-menu-item>
+            <el-menu-item index="2-2">修改密码</el-menu-item>
+            <el-menu-item index="2-3">退出系统</el-menu-item>
+          </el-sub-menu>
+        </el-menu>
+      </div>
       <div class="content">3</div>
     </div>
   </div>
@@ -81,9 +99,15 @@ import { User, House, Document, Setting } from '@element-plus/icons-vue'
     .top {
       height: 60px;
       background-color: #142334;
+      display: flex;
+      justify-content: flex-end;
+      .el-menu {
+        border-bottom: none;
+      }
     }
     .content {
       flex: 1;
+      padding: 5px;
     }
   }
 }

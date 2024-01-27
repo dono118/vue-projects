@@ -3,6 +3,7 @@
     <div class="left">
       <h2>Bing酒店综合平台</h2>
       <el-menu
+        router
         active-text-color="#ffd04b"
         background-color="#142334"
         class="el-menu-vertical-demo"
@@ -14,56 +15,59 @@
             <el-icon><User /></el-icon>
             <span>账号管理</span>
           </template>
-          <el-menu-item index="1-1">角色管理</el-menu-item>
-          <el-menu-item index="1-2">用户管理</el-menu-item>
+          <el-menu-item index="/role">角色管理</el-menu-item>
+          <el-menu-item index="/user">用户管理</el-menu-item>
         </el-sub-menu>
         <el-sub-menu index="2">
           <template #title>
             <el-icon><House /></el-icon>
             <span>客房管理</span>
           </template>
-          <el-menu-item index="2-1">房型管理</el-menu-item>
-          <el-menu-item index="2-2">房间管理</el-menu-item>
+          <el-menu-item index="/roomType">房型管理</el-menu-item>
+          <el-menu-item index="/room">房间管理</el-menu-item>
         </el-sub-menu>
         <el-sub-menu index="3">
           <template #title>
             <el-icon><Document /></el-icon>
             <span>客户管理</span>
           </template>
-          <el-menu-item index="3-1">入住管理</el-menu-item>
-          <el-menu-item index="3-2">客户订单</el-menu-item>
+          <el-menu-item index="/checkIn">入住管理</el-menu-item>
+          <el-menu-item index="/order">客户订单</el-menu-item>
         </el-sub-menu>
         <el-sub-menu index="4">
           <template #title>
             <el-icon><Setting /></el-icon>
             <span>系统管理</span>
           </template>
-          <el-menu-item index="4-1">菜单管理</el-menu-item>
-          <el-menu-item index="4-2">字典管理</el-menu-item>
+          <el-menu-item index="/menu">菜单管理</el-menu-item>
+          <el-menu-item index="/dictionary">字典管理</el-menu-item>
         </el-sub-menu>
       </el-menu>
     </div>
     <div class="right">
       <div class="top">
         <el-menu
+          router
           :ellipsis="false"
           mode="horizontal"
           active-text-color="#ffd04b"
           background-color="#142334"
           text-color="#fff"
         >
-          <el-menu-item index="1">首页</el-menu-item>
-          <el-menu-item index="3">消息</el-menu-item>
-          <el-menu-item index="4">订单</el-menu-item>
+          <el-menu-item index="/home">首页</el-menu-item>
+          <el-menu-item index="/message">消息</el-menu-item>
+          <el-menu-item index="/order">订单</el-menu-item>
           <el-sub-menu index="2">
             <template #title>管理员</template>
-            <el-menu-item index="2-1">个人中心</el-menu-item>
-            <el-menu-item index="2-2">修改密码</el-menu-item>
-            <el-menu-item index="2-3">退出系统</el-menu-item>
+            <el-menu-item index="/mine">个人中心</el-menu-item>
+            <el-menu-item index="/mine">修改密码</el-menu-item>
+            <el-menu-item index="/mine">退出系统</el-menu-item>
           </el-sub-menu>
         </el-menu>
       </div>
-      <div class="content">3</div>
+      <div class="content">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>

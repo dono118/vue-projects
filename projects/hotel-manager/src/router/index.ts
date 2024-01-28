@@ -1,4 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -75,6 +77,18 @@ const router = createRouter({
       ]
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  NProgress.start()
+  next()
+})
+
+router.afterEach((to, from) => {
+  if (to?.meta?.title) {
+    document.title = to.meta.title.toString()
+  }
+  NProgress.done()
 })
 
 export default router

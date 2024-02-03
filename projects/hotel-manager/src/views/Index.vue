@@ -73,7 +73,19 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { User, House, Document, Setting } from '@element-plus/icons-vue'
+import useUser from '../store/user'
+
+const userStore = useUser()
+const router = useRouter()
+
+onMounted(() => {
+  if (!userStore?.user?.username) {
+    router.push('/')
+  }
+})
 </script>
 
 <style lang="scss" scoped>

@@ -14,7 +14,7 @@ instance.interceptors.request.use(
     // 每次发送请求之前，向请求头中添加 token 信息
     const token = sessionStorage.getItem('token')
     if (token) {
-      config.headers['token'] = sessionStorage.getItem('token')
+      config.headers['Authorization'] = sessionStorage.getItem('token')
     }
     return config
   },

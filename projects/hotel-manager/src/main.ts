@@ -8,5 +8,6 @@ import 'element-plus/dist/index.css'
 
 // 导入路由器
 import router from './router'
+import { createPinia } from 'pinia'
 
-createApp(App).use(ElementPlus).use(router).mount('#app')
+createApp(App).use(ElementPlus).use(router).use(createPinia()).mount('#app')

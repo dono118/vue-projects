@@ -1,4 +1,4 @@
-import { $post } from '../utils/request'
+import { $get, $post } from '../utils/request'
 import { md5 } from 'md5js'
 import { ElMessage } from 'element-plus'
 
@@ -21,6 +21,18 @@ export const $login = async (params: loginParam) => {
     sessionStorage.setItem('token', token)
     ElMessage.success(msg)
     return true
+  } else {
+    ElMessage.error(msg)
+    return false
+  }
+}
+
+// 根据用户名获取用户信息
+export const $getUserInfo = async (params: object) => {
+  let res = await $get('my/getUserInfo', params)
+  const { code, msg, data } = res
+  if (code === 200) {
+    return data
   } else {
     ElMessage.error(msg)
     return false

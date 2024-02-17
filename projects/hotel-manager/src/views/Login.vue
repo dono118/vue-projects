@@ -37,7 +37,7 @@ import { reactive, ref } from 'vue'
 // 导入路由器
 import { useRouter } from 'vue-router'
 // 导入user全局状态
-import useUser from '../store/user'
+import { useUserStore } from '../store/user'
 // 导入element-plus类型
 import type { FormInstance, FormRules } from 'element-plus'
 // 导入请求api
@@ -46,7 +46,7 @@ import { $login, $getUserInfo } from '../api/admin'
 // 创建路由器对象
 const router = useRouter()
 // 获取user全局状态
-const userStore = useUser()
+const userStore = useUserStore()
 
 // 定义一个ref对象绑定表单
 const formRef = ref<FormInstance>()

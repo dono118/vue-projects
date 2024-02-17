@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 
-export default defineStore('user', {
-  state() {
+export const useUserStore = defineStore('user', {
+  state: () => {
     return {
       user: {
         username: ''
@@ -12,5 +12,7 @@ export default defineStore('user', {
     setUser(user: { username: string }) {
       this.user = user
     }
-  }
+  },
+  // 模块开启持久化
+  persist: true
 })

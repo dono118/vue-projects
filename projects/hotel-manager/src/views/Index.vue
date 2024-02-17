@@ -76,9 +76,9 @@
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { User, House, Document, Setting } from '@element-plus/icons-vue'
-import useUser from '../store/user'
+import { useUserStore } from '../store/user'
 
-const userStore = useUser()
+const userStore = useUserStore()
 const router = useRouter()
 
 onMounted(() => {

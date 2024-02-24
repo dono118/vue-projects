@@ -61,7 +61,7 @@
             <template #title>管理员</template>
             <el-menu-item index="/mine">个人中心</el-menu-item>
             <el-menu-item index="/mine">修改密码</el-menu-item>
-            <el-menu-item index="/mine">退出系统</el-menu-item>
+            <el-menu-item index="" @click="onExit">退出系统</el-menu-item>
           </el-sub-menu>
         </el-menu>
       </div>
@@ -75,6 +75,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { ElMessageBox } from 'element-plus'
 import { User, House, Document, Setting } from '@element-plus/icons-vue'
 import { useUserStore } from '../store/user'
 
@@ -86,6 +87,20 @@ onMounted(() => {
     router.push('/')
   }
 })
+
+// 退出系统
+const onExit = () => {
+  ElMessageBox.confirm('确定退出系统吗？', '系统提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  })
+    .then(() => {
+      userStore.clearUser()
+      router.push('/')
+    })
+    .catch(() => {})
+}
 </script>
 
 <style lang="scss" scoped>

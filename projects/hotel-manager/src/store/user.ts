@@ -11,6 +11,12 @@ export const useUserStore = defineStore('user', {
   actions: {
     setUser(user: { username: string }) {
       this.user = user
+    },
+    clearUser() {
+      sessionStorage.clear()
+      this.user = {
+        username: ''
+      }
     }
   },
   // 模块开启持久化

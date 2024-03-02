@@ -54,7 +54,7 @@
           background-color="#142334"
           text-color="#fff"
         >
-          <el-menu-item index="/home">首页</el-menu-item>
+          <el-menu-item index="/index">首页</el-menu-item>
           <el-menu-item index="/message">消息</el-menu-item>
           <el-menu-item index="/order">订单</el-menu-item>
           <el-sub-menu index="2">

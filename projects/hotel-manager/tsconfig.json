@@ -20,8 +20,14 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    "types": ["element-plus/global"]
+    "types": ["element-plus/global"],
+    "baseUrl": ".", //是否配置baseUrl
+    "paths": {
+      //是否配置paths
+      "@/*": ["src/*"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "exclude": ["node_modules", "**/node_modules/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

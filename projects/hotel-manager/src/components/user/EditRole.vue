@@ -37,6 +37,7 @@
 import { ref, reactive } from 'vue'
 // 导入element-plus类型
 import type { FormInstance, FormRules } from 'element-plus'
+import { $add } from '@/api/role.ts'
 
 const drawer = ref(false)
 
@@ -78,7 +79,8 @@ const confirmClick = (formEl: FormInstance | undefined) => {
       let params = {
         roleName: roleForm.roleName
       }
-      console.log('submit=>', params)
+      let res = await $add(params)
+      console.log('submit=>', res)
     } else {
       console.log('error submit!')
       return false

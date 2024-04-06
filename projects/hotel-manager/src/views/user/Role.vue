@@ -24,7 +24,7 @@
       </el-table-column>
     </el-table>
     <!-- 新增/编辑角色抽屉组件 -->
-    <EditRole ref="editRef"></EditRole>
+    <EditRole ref="editRef" @sync-list="loadRoles"></EditRole>
   </div>
 </template>
 

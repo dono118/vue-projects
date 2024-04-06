@@ -1,4 +1,4 @@
-import { $get } from '../utils/request'
+import { $get, $post } from '../utils/request'
 import { ElMessage } from 'element-plus'
 
 // 获取角色列表
@@ -16,11 +16,12 @@ export const $list = async (params: object) => {
 // 添加角色
 export const $add = async (params: object) => {
   let res = await $post('my/addRole', params)
-  const { code, msg, data } = res
+  const { code, msg } = res
   if (code === 200) {
-    return data
+    ElMessage.success(msg)
+    return true
   } else {
     ElMessage.error(msg)
-    return []
+    return false
   }
 }

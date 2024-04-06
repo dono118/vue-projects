@@ -39,6 +39,8 @@ import { ref, reactive } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { $add } from '@/api/role.ts'
 
+const emit = defineEmits(['sync-list'])
+// 抽屉变量
 const drawer = ref(false)
 
 // 定义一个ref对象绑定表单
@@ -80,7 +82,10 @@ const confirmClick = (formEl: FormInstance | undefined) => {
         roleName: roleForm.roleName
       }
       let res = await $add(params)
-      console.log('submit=>', res)
+      // 通知父组件更新列表数据
+      res && emit('sync-list')
+      // 重置表单
+      formRef.value?.resetFields()
     } else {
       console.log('error submit!')
       return false

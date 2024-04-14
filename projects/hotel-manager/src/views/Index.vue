@@ -83,9 +83,9 @@ const userStore = useUserStore()
 const router = useRouter()
 
 onMounted(() => {
-  if (!userStore?.user?.username) {
-    router.push('/')
-  }
+  // if (!userStore?.user?.username) {
+  //   router.push('/')
+  // }
 })
 
 // 退出系统

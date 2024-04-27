@@ -5,6 +5,7 @@
     <p>价格：{{ car.price }}万RMB</p>
     <el-button type="primary" @click="changePrice(1)">涨价</el-button>
     <el-button @click="changePrice(-1)">降价</el-button>
+    <el-button type="danger" plain @click="changeCar">更换汽车</el-button>
     <h2>汽车销量排行：</h2>
     <ul>
       <li v-for="r in rankList" :key="r.id">{{ r.brand }}</li>
@@ -14,17 +15,24 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { ref, reactive } from 'vue'
 
 // 数据
-const car = reactive({ brand: '特斯拉', price: 20 })
+let car = reactive({ brand: '特斯拉', price: 20 })
 // 方法
 const changePrice = (num: number) => {
   car.price += num
 }
+const changeCar = () => {
+  // 以下两种写法页面不会更新
+  // car = { brand: '比亚迪', price: 22 }
+  // car = reactive({ brand: '比亚迪', price: 22 })
+  // 应该这么写
+  Object.assign(car, { brand: '比亚迪', price: 22 })
+}
 
 // 数据
-const rankList = reactive([
+const rankList = ref([
   {
     id: 1,
     brand: '丰田'
@@ -48,7 +56,7 @@ const rankList = reactive([
 ])
 // 方法
 const changeRank = () => {
-  rankList[0].brand = '小米'
+  rankList.value[0].brand = '小米'
 }
 </script>
 

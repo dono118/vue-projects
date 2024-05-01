@@ -58,7 +58,7 @@ const loginForm = reactive({
 })
 
 // 验证账号
-const checkLoginId = (rule: any, value: any, callback: any) => {
+const checkLoginId = (_: any, value: any, callback: any) => {
   if (!value) {
     return callback(new Error('请输入账号'))
   } else {
@@ -67,7 +67,7 @@ const checkLoginId = (rule: any, value: any, callback: any) => {
 }
 
 // 验证密码
-const checkLoginPwd = (rule: any, value: any, callback: any) => {
+const checkLoginPwd = (_: any, value: any, callback: any) => {
   if (value === '') {
     callback(new Error('请输入密码'))
   } else {

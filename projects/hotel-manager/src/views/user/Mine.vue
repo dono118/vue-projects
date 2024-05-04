@@ -1,106 +1,95 @@
 <template>
   <div class="mine">
-    <h2>车主信息</h2>
-    <p>
-      名：<el-input v-model="firstname" /> 姓：<el-input v-model="lastname" />
-      全名：<span>{{ fullname }}</span>
-    </p>
-    <el-button type="primary" @click="changeFullname">修改全名</el-button>
-    <h2>汽车信息：</h2>
-    <p>品牌：{{ car.brand }}</p>
-    <p>价格：{{ car.price }}万RMB</p>
-    <el-button type="primary" @click="changePrice(1)">涨价</el-button>
-    <el-button @click="changePrice(-1)">降价</el-button>
-    <p>更新后品牌：{{ newBrand }}</p>
-    <el-button type="warning" @click="changeBrand">更换品牌</el-button>
-    <el-button type="danger" plain @click="changeCar">更换汽车</el-button>
-    <h2>汽车销量排行：</h2>
-    <ul>
-      <li v-for="r in rankList" :key="r.id">{{ r.brand }}</li>
-    </ul>
-    <el-button type="primary" @click="changeRank">更新排名</el-button>
+    <h2>watch与watchEffect的区别与使用</h2>
+    <div>
+      <div>count：{{ count }}</div>
+      <button @click="add">+1</button>
+      <div>品牌：{{ obj.brand.name }}</div>
+      <button @click="changeBrandName">更改品牌</button>
+    </div>
+    <h2>监测水温和水位</h2>
+    <div>
+      <p>当前水温：{{ temp }}℃</p>
+      <p>当前水位：{{ height }}cm</p>
+      <button @click="changeTemp">水温上升</button>
+      <button @click="changeHeight">水位上升</button>
+    </div>
+    <div></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, toRef, toRefs, computed } from 'vue'
+import { ref, reactive, watch, watchEffect } from 'vue'
 
-// 数据
-let car = reactive({ brand: '特斯拉', price: 20 })
-
-/**
- * toRef 函数可以将一个响应式对象的属性转换为一个独立的 ref 对象
- * 返回的是一个指向源对象属性的 ref 引用，任何对该引用的修改都会同步到源对象属性上
- * 使用 toRef 时需要传入源对象和属性名作为参数
- */
-let newBrand = toRef(car, 'brand')
-
-/**
- * toRefs 函数可以将一个响应式对象转换为一个普通的对象，该对象的每个属性都是独立的 ref 对象
- * 返回的对象可以进行解构，每个属性都可以像普通的 ref 对象一样访问和修改，而且会保持响应式的关联。
- * toRefs 的使用场景主要是在将响应式对象作为属性传递给子组件时，确保子组件可以正确地访问和更新这些属性
- */
-let { price } = toRefs(car)
-
-// 方法
-const changePrice = (num: number) => {
-  price.value += num
+const count = ref(0)
+const add = () => {
+  count.value++
 }
-const changeBrand = () => {
-  newBrand.value = '联想'
-}
-const changeCar = () => {
-  // 以下两种写法页面不会更新
-  // car = { brand: '比亚迪', price: 22 }
-  // car = reactive({ brand: '比亚迪', price: 22 })
-  // 应该这么写
-  Object.assign(car, { brand: '比亚迪', price: 22 })
-}
-
-// 数据
-const rankList = ref([
-  {
+watch(count, (newVal, oldVal) => {
+  console.log('值改变了', newVal, oldVal)
+})
+const obj = reactive({
+  name: 'Elon Musk',
+  birthday: '1971-6-28',
+  brand: {
     id: 1,
-    brand: '丰田'
-  },
-  {
-    id: 2,
-    brand: '奔驰'
-  },
-  {
-    id: 3,
-    brand: '宝马'
-  },
-  {
-    id: 4,
-    brand: '奥迪'
-  },
-  {
-    id: 5,
-    brand: '特斯拉'
-  }
-])
-// 方法
-const changeRank = () => {
-  rankList.value[0].brand = '小米'
-}
-
-let firstname = ref('Elon')
-let lastname = ref('Musk')
-let fullname = computed({
-  get() {
-    return firstname.value + ' ' + lastname.value
-  },
-  set(newVal) {
-    const [fName, lName] = newVal.split(' ')
-    firstname.value = fName
-    lastname.value = lName
+    name: '特斯拉'
   }
 })
-
-const changeFullname = () => {
-  fullname.value = 'Steve Jobs'
+const changeBrandName = () => {
+  obj.brand.name = '奔驰'
 }
+/**
+ * watch只能监听4种类型数据：ref、reactive、getter函数、上述三种组成的数组
+ * 注意：
+ * ① 监听ref定义的对象类型，监听的是对象地址变化，开启深度监视之后才可以监听到内部任意属性变化
+ * ② 监听reactive定义的对象类型，强制开启了深度监视（不可关掉）
+ * ③ 监听ref/reactive对象中的某个基本类型数据时，必须写成箭头函数形式返回
+ * ④ 监听ref/reactive对象中的某个引用类型数据时，不写箭头函数，监听的是内部所有属性变化；
+ * 写成箭头函数监听的是地址，需开启深度监视才既能监听地址变化，又能监听内部所有属性变化
+ */
+watch(
+  () => obj.brand,
+  () => {
+    console.log('监听的obj.brand.name改变了')
+  },
+  {
+    deep: true
+    // immediate: true
+  }
+)
+
+let temp = ref(10)
+let height = ref(0)
+
+const changeTemp = () => {
+  temp.value += 10
+}
+
+const changeHeight = () => {
+  height.value += 10
+}
+
+// watch([temp, height], newVal => {
+//   console.log(`output->newVal`, newVal)
+//   let [newTemp, newHeight] = newVal
+//   if (newTemp >= 60 || newHeight >= 80) {
+//     console.log('给服务器发送请求...')
+//   }
+// })
+
+/**
+ * watchEffect 也是一个帧听器，是一个副作用函数。
+ * 它会监听引用数据类型的所有属性，不需要具体到某个属性，一旦运行就会立即监听，组件卸载的时候会停止监听。
+ * 说明：
+ * ① 在页面初始化的时候会执行一次
+ * ② watch必须指定需要监听哪个对象，而watchEffect无需指定，函数内部用到了哪个属性，等这个属性变化时，watchEffect会自动调用
+ */
+watchEffect(() => {
+  if (temp.value >= 60 || height.value >= 80) {
+    console.log('给服务器发送请求...')
+  }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -109,5 +98,8 @@ const changeFullname = () => {
   box-shadow: 0 0 10px;
   border-radius: 10px;
   padding: 20px;
+  button {
+    margin-right: 10px;
+  }
 }
 </style>

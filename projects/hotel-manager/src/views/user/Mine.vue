@@ -1,11 +1,13 @@
 <template>
-  <div>
+  <div class="mine">
     <input ref="inputRef" type="text" />
-    <button @click="focusInput">Focus Input</button>
+    <Person ref="person" />
+    <button @click="showLog">ShowLog</button>
   </div>
 </template>
 
 <script setup lang="ts">
+import Person from '@/components/mine/Person.vue'
 import { ref, onMounted } from 'vue'
 
 // interface Focusable {
@@ -33,6 +35,12 @@ onMounted(() => {
   // 在组件挂载后立即聚焦输入框
   focusInput()
 })
+
+let person = ref()
+
+const showLog = () => {
+  console.log(person.value) // Proxy(Object) {a: RefImpl, __v_skip: true}
+}
 </script>
 
 <style lang="scss" scoped>

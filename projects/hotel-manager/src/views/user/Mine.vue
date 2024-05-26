@@ -1,14 +1,15 @@
 <template>
   <div class="mine">
     <input ref="inputRef" type="text" />
-    <Person ref="person" />
+    <Person ref="person" :list="personList" />
     <button @click="showLog">ShowLog</button>
   </div>
 </template>
 
 <script setup lang="ts">
 import Person from '@/components/mine/Person.vue'
-import { ref, onMounted } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
+import { type TPersons } from '@/types'
 
 // interface Focusable {
 //   focus: () => void
@@ -37,9 +38,15 @@ onMounted(() => {
 })
 
 let person = ref()
+let personList = reactive<TPersons>([
+  { id: '310001', name: '张三', age: 20 },
+  { id: '310002', name: '李四', age: 23 },
+  { id: '310003', name: '王五', age: 25 }
+])
 
 const showLog = () => {
   console.log(person.value) // Proxy(Object) {a: RefImpl, __v_skip: true}
+  console.log(personList)
 }
 </script>
 

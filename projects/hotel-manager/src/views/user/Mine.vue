@@ -3,11 +3,13 @@
     <input ref="inputRef" type="text" />
     <Person ref="person" :list="personList" />
     <button @click="showLog">ShowLog</button>
+    <Counter />
   </div>
 </template>
 
 <script setup lang="ts">
 import Person from '@/components/mine/Person.vue'
+import Counter from '@/components/mine/Counter.vue'
 import { ref, reactive, onMounted } from 'vue'
 import { type TPersons } from '@/types'
 

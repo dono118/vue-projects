@@ -4,6 +4,7 @@
     <Person ref="person" :list="personList" />
     <button @click="showLog">ShowLog</button>
     <order-info />
+    <love-talk />
     <Counter />
   </div>
 </template>
@@ -12,6 +13,7 @@
 import Person from '@/components/mine/Person.vue'
 import Counter from '@/components/mine/Counter.vue'
 import OrderInfo from '@/components/mine/OrderInfo.vue'
+import LoveTalk from '@/components/mine/LoveTalk.vue'
 import { ref, reactive, onMounted } from 'vue'
 import { type TPersons } from '@/types'
 

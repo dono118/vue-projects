@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <router-view></router-view>
+  <div>社区</div>
 </template>
 
 <style scoped></style>

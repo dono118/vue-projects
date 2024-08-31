@@ -1,7 +1,10 @@
-<script setup></script>
+<script setup>
+import BottomNav from '@/views/BottomNav.vue'
+</script>
 
 <template>
-  <router-view></router-view>
+  <router-view />
+  <bottom-nav />
 </template>
 
 <style scoped></style>

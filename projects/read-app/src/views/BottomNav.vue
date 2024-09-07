@@ -1,18 +1,17 @@
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+let routeList = ref([
+  { title: '书城', to: '/' },
+  { title: '社区', to: '/community' },
+  { title: '福利', to: '/welfare' },
+  { title: '我的', to: '/mine' }
+])
+</script>
 
 <template>
   <div class="bottom-nav">
-    <router-link to="/" exact>
-      <span>书城</span>
-    </router-link>
-    <router-link to="/community">
-      <span>社区</span>
-    </router-link>
-    <router-link to="/welfare">
-      <span>福利</span>
-    </router-link>
-    <router-link to="/mine">
-      <span>我的</span>
+    <router-link v-for="(r, i) in routeList" :key="i" :to="r.to" exact>
+      <span>{{ r.title }}</span>
     </router-link>
   </div>
 </template>

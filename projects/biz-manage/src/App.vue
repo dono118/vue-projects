@@ -36,7 +36,7 @@ export default defineComponent({
   setup() {
     return {
       zIndex: 3000,
-      size: 'small',
+      size: 'default',
       locales: zhCnLocales,
     }
   },
